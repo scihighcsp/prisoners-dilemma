@@ -34,7 +34,7 @@ import random
 import os.path              
     
 import example0, example1, example2, example3
-import example4, example5, example6, example7
+#import example4, example5, example6, example7
 import team0, team1, team2, team3, team4
 import team5, team6, team7, team8, team9
 import team10, team11, team12, team13, team14
@@ -52,15 +52,15 @@ for module in modules:
             setattr(module, required_variable, 'missing assignment')
 
 def main_play(modules):
-    '''main_play plays a tournament and outputs results to screen and file.
-    This function is called once when this file is executed.
-    modules: a list of modules such as [team1, team2]    
+   # '''main_play plays a tournament and outputs results to screen and file.
+    #This function is called once when this file is executed.
+    #modules: a list of modules such as [team1, team2]    
     
-    Returns:
-        scores:
-        moves:
-        sections: a list of [str, str, str, list of str]    
-            '''
+    #Returns:
+       # scores:
+      #  moves:
+     #   sections: a list of [str, str, str, list of str]    
+    #        '''
     scores, moves = play_tournament(modules)
     section0, section1, section2, section3 = make_reports(modules, scores, moves)
     code = make_code_string(modules)
