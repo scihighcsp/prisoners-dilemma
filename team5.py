@@ -6,10 +6,10 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
-    
+team_name = '5-in-1' # Only 10 chars displayed.
+strategy_name = 'Collude first round, Betray until not betrayed consecutively'
+strategy_description = 'Collude the first round, Betray every round unless not betrayed 10 rounds prior -Semaj'
+
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
     my_score, their_score are ints.
@@ -17,7 +17,7 @@ def move(my_history, their_history, my_score, their_score):
     Make my move.
     Returns 'c' or 'b'. 
     '''
-
+    c_rounds = 0
     # my_history: a string with one letter (c or b) per round that has been played with this opponent.
     # their_history: a string of the same length as history, possibly empty. 
     # The first round between these two players is my_history[0] and their_history[0].
@@ -26,7 +26,16 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
+    if len(my_history) == 0 and len(their_history) == 0:
+        return 'c'
+    elif len(their_history) >= 10 :
+        for i in range (10,0,-1):
+            if their_history[i] == 'c' :
+                c_rounds += 1
+        if c_rounds == 10:
+            return 'c'
+    else:
+        return 'b'
 
     
 def test_move(my_history, their_history, my_score, their_score, result):
