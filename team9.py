@@ -6,9 +6,9 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'The name the team gives to itself' # Only 10 chars displayed.
-strategy_name = 'The name the team gives to this strategy'
-strategy_description = 'How does this strategy decide?'
+team_name = '009DoNeal' # Only 10 chars displayed.
+strategy_name = 'Three Strikes'
+strategy_description = 'Based off the opponents last choice, the code will collude or betray in a certain order within 3 rounds.Based off the last action after the third round, the order of betrayal and collusion changes.'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
@@ -26,8 +26,15 @@ def move(my_history, their_history, my_score, their_score):
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
     
-    return 'c'
-
+    if len(my_history)==0: # It's the first round: collude
+       return 'c'
+    else:
+        recent_round_them=their_history[-3]
+        if 'b' in their_history[-3:]<0.66: # If the other player has betrayed within last 2/3 rounds, 
+            return 'b'               # Betray.
+        else:
+            return 'c'         
+    
     
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
