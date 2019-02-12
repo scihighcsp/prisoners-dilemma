@@ -9,7 +9,7 @@ import random
 
 team_name = 'Eclipse' # Only 10 chars displayed.
 strategy_name = 'Chance'
-strategy_description = 'Randomly chooses an option'
+strategy_description = 'Randomly chooses an option - Michael'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
