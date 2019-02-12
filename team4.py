@@ -6,7 +6,7 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'Jeysi Guillen' # Only 10 chars displayed.
+team_name = 'Jeysi' # Only 10 chars displayed.
 strategy_name = 'Betraying'
 strategy_description = 'The first move will be betray.When ever they collude I collude. then when they betray I betray.' 
     

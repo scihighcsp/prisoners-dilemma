@@ -9,7 +9,7 @@ import random
 
 team_name = 'Midnight' # Only 10 chars displayed.
 strategy_name = 'Past Chance Guess'
-strategy_description = 'Answer will vary based upon opponents last two choices in their history, otherwise it will randomly choose.'
+strategy_description = 'Answer will vary based upon opponents last two choices in their history, otherwise it will randomly choose. - Michael'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.

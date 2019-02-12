@@ -6,7 +6,7 @@
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = Ben # Only 10 chars displayed.
+team_name = 'Ben' # Only 10 chars displayed.
 strategy_name = ''
 strategy_description = 'If i get betrayed, always betray next move'
     

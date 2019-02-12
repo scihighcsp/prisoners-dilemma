@@ -8,7 +8,7 @@
 
 team_name = 'FoxHound' # Only 10 chars displayed.
 strategy_name = 'The Best offense Is The Best Defense'
-strategy_description = 'Swap between collide and betray'
+strategy_description = 'Swap between collide and betray: Kyler'
     
 def move(my_history, their_history, my_score, their_score):
     ''' Arguments accepted: my_history, their_history are strings.
