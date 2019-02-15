@@ -26,12 +26,13 @@ def move(my_history, their_history, my_score, their_score):
     
     # Analyze my_history and their_history and/or my_score and their_score.
     # Decide whether to return 'c' or 'b'.
-    if their_history[-3] == 'c' and their_history[-2] == 'b':
-        return 'b'
-    elif their_history[-3] == 'b' and their_history[-2] == 'b':
-        return 'b'
+    if len(their_history) >= 4:
+        if their_history[-3] == 'c' and their_history[-2] == 'b':
+            return 'b'
+        elif their_history[-3] == 'b' and their_history[-2] == 'b':
+            return 'b'
     else:
-        return random.randint(options)
+        return options[random.randint(0, len(options)-1)]
     
 def test_move(my_history, their_history, my_score, their_score, result):
     '''calls move(my_history, their_history, my_score, their_score)
