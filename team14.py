@@ -8,7 +8,7 @@
 
 
 
-team_name = 'The Goldman'
+team_name = 'TheGoldman'
 strategy_name = 'Mostly C until B'
 strategy_description = 'Collude for 8 turns, then collude until betrayed'
 

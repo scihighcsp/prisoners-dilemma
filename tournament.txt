@@ -1,0 +1,2974 @@
+--------------------------------------------------------------------------------
+Section 0 - Line up
+--------------------------------------------------------------------------------
+Player 0 (P0): Ben, alternate
+        If i get betrayed, always betray next move
+Player 1 (P1): cape diem, collude at desperate times
+        betray first , then collude
+Player 2 (P2): D9, betray
+        betray,alternate then Collude.
+Player 3 (P3): FoxHound, The Best offense Is The Best Defense
+        Swap between collide and betray: Kyler
+Player 4 (P4): Jeysi, Betraying
+        The first move will be betray.When ever they collude I collude. then whe
+        n they betray I betray.
+Player 5 (P5): 5-in-1, Collude first round, Betray until not betrayed consecutively
+        Collude the first round, Betray every round unless not betrayed 10 round
+        s prior -Semaj
+Player 6 (P6): Team Team, BIG BUTTERY CAKES
+        It will betray twice then colude. - Otis
+Player 7 (P7): Midnight, Past Chance Guess
+        Answer will vary based upon opponents last two choices in their history,
+         otherwise it will randomly choose. - Michael
+Player 8 (P8): that 1 guy, Blitzkrieg
+        betray evrytime besides after a betray
+Player 9 (P9): 009DoNeal, Three Strikes
+        Based off the opponents last choice, the code will collude or betray in 
+        a certain order within 3 rounds.Based off the last action after the thir
+        d round, the order of betrayal and collusion changes.
+Player 10 (P10): Eclipse, Chance
+        Randomly chooses an option - Michael
+Player 11 (P11): The name the team gives to itself, The name the team gives to this strategy
+        How does this strategy decide?
+Player 12 (P12): TheGoldman, Mostly C until B
+        Collude for 8 turns, then collude until betrayed
+Player 13 (P13): tit for tat, mimick
+        copies oponents move
+--------------------------------------------------------------------------------
+Section 1 - Player vs. Player
+--------------------------------------------------------------------------------
+Each column shows pts/round earned against each other player:
+             P0     P1     P2     P3     P4     P5     P6     P7     P8     P9    P10    P11    P12    P13
+vs. P0 :      0   -247     76     -5      0   -224   -250   -241     92    -21     40   -500     61     -4
+vs. P1 :   -247      0   -250   -249   -248   -249   -250   -250   -249   -250   -250   -250   -250   -249
+vs. P2 :   -477   -246      0   -242   -483   -239   -250   -242   -241   -242   -355   -477   -245   -241
+vs. P3 :     -5   -249   -239      0     -5   -246   -250   -245   -237      0   -153      0      0      0
+vs. P4 :     -8   -251     89     -5      0   -238   -250   -246     88     -7     44    -10     84     -6
+vs. P5 :   -266   -249   -255   -250   -257      0   -250   -249   -250   -257   -257   -262   -261   -250
+vs. P6 :   -250   -250   -250   -250   -250   -250      0   -250   -250   -250   -250   -250   -250   -250
+vs. P7 :   -252   -244   -252   -250   -250   -249   -250      0   -328   -248   -309   -253   -250   -331
+vs. P8 :   -488   -249   -247   -243   -483   -247   -250   -132      0   -242   -223   -481   -251   -243
+vs. P9 :    -11   -244   -239      0     -1   -233   -250   -240   -237      0   -298      0      0      0
+vs. P10 :   -232   -244    -85   -153   -266   -238   -250   -163   -124    -98      0   -211    -91   -161
+vs. P11 :    100   -245     95      0      2   -229   -250   -242     96      0     42      0      0      0
+vs. P12 :   -462   -244   -235      0   -468   -229   -250   -243   -230      0   -335      0      0      0
+vs. P13 :     -4   -249   -237      0     -6   -245   -250   -132   -237      0   -156      0      0      0
+TOTAL  :  -2607  -3216  -2029  -1650  -2718  -3121  -3250  -2880  -2109  -1618  -2461  -2695  -1453  -1737
+--------------------------------------------------------------------------------
+Section 2 - Leaderboard
+--------------------------------------------------------------------------------
+Average points per round:
+Team name (P#):  Score      with strategy name
+TheGoldman(P12):       -103 points with Mostly C until B                        
+009DoNeal (P9):       -115 points with Three Strikes                           
+FoxHound  (P3):       -117 points with The Best offense Is The Best Defense    
+tit for ta(P13):       -124 points with mimick                                  
+D9        (P2):       -144 points with betray                                  
+that 1 guy(P8):       -150 points with Blitzkrieg                              
+Eclipse   (P10):       -175 points with Chance                                  
+Ben       (P0):       -186 points with alternate                               
+The name t(P11):       -192 points with The name the team gives to this strategy
+Jeysi     (P4):       -194 points with Betraying                               
+Midnight  (P7):       -205 points with Past Chance Guess                       
+5-in-1    (P5):       -222 points with Collude first round, Betray until not be
+cape diem (P1):       -229 points with collude at desperate times              
+Team Team (P6):       -232 points with BIG BUTTERY CAKES                       
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+team0--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Ben' # Only 10 chars displayed.
+strategy_name = 'alternate'
+strategy_description = 'If i get betrayed, always betray next move'
+    
+def move(my_history, their_history, my_score, their_score):
+    if len(my_history)==0:
+        return 'b'
+    elif my_history[-1]=='c' and their_history[-1]=='b':
+        return 'c'
+    elif my_history[-1]=='b' and their_history[-1]=='c':
+        return 'b'
+    else:
+        return 'c'
+        
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0,
+              their_score=0,
+              result='b')--------------------------------------------------------------------------------
+team1--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'cape diem' # Only 10 chars displayed.
+strategy_name = 'collude at desperate times'
+strategy_description = 'betray first , then collude'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if len(their_history)==0:
+       return 'b'
+    elif my_history[-1]=='b':
+        return 'c'
+        
+    
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team2--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'D9' # Only 10 chars displayed.
+strategy_name = 'betray'
+strategy_description = 'betray,alternate then Collude.'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if len(my_history) <= 5:
+        return 'c'
+    elif len(my_history) >= 5:
+        return 'b'
+        
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team3--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'FoxHound' # Only 10 chars displayed.
+strategy_name = 'The Best offense Is The Best Defense'
+strategy_description = 'Swap between collide and betray: Kyler'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if len(my_history)==0:
+        return 'c'
+    elif their_history[-1] == 'b':
+        return 'b'
+    else :
+        return 'c'
+    
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team4--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Jeysi' # Only 10 chars displayed.
+strategy_name = 'Betraying'
+strategy_description = 'The first move will be betray.When ever they collude I collude. then when they betray I betray.' 
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if len(their_history)==0:
+       return 'b'
+    elif len(their_history)>=3:
+        return 'c'   
+    elif their_history[-1] =='b':
+        return 'b'
+    elif their_history[-1]=='c':
+        return 'b'
+    
+   
+   
+   
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team5--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = '5-in-1' # Only 10 chars displayed.
+strategy_name = 'Collude first round, Betray until not betrayed consecutively'
+strategy_description = 'Collude the first round, Betray every round unless not betrayed 10 rounds prior -Semaj'
+
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    c_rounds = 0
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if len(my_history) == 0 and len(their_history) == 0:
+        return 'c'
+    elif len(their_history) >= 10 :
+        for i in range (-10,0,-1):
+            if their_history[i] == 'c':
+                c_rounds += 1
+        if c_rounds == 10:
+            return 'c'
+    else:
+        return 'b'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team6--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team Team' # Only 10 chars displayed.	
+strategy_name = 'BIG BUTTERY CAKES'	
+strategy_description = 'It will betray twice then colude. - Otis'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    if my_history==0:	
+        if my_history[-1]=='b' + my_history[-2]=='b' + my_history[-3]=='b':	
+            return 'c'	
+        else:	
+            return'b'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team7--------------------------------------------------------------------------------
+import random
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Midnight' # Only 10 chars displayed.
+strategy_name = 'Past Chance Guess'
+strategy_description = 'Answer will vary based upon opponents last two choices in their history, otherwise it will randomly choose. - Michael'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    options = ('b','c')
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    if len(their_history) >= 4:
+        if their_history[-3] == 'c' and their_history[-2] == 'b':
+            return 'b'
+        elif their_history[-3] == 'b' and their_history[-2] == 'b':
+            return 'b'
+    else:
+        return options[random.randint(0, len(options)-1)]
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team8--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name ='that 1 guy'
+strategy_name = 'Blitzkrieg'
+strategy_description = 'betray evrytime besides after a betray'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if 'b' in their_history[-1:]: # If the other player has betrayed within last round, 
+        return 'b'               # Betray.
+    elif len(their_history) >= 4:
+        if their_history[-1]=='c' and their_history[-2]=='c' and their_history[-3]=='c':
+        #if they callude 3 times conseulitvley
+            return 'b'                #betray
+    else: 
+        return 'c'
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team9--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = '009DoNeal' # Only 10 chars displayed.
+strategy_name = 'Three Strikes'
+strategy_description = 'Based off the opponents last choice, the code will collude or betray in a certain order within 3 rounds.Based off the last action after the third round, the order of betrayal and collusion changes.'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if len(my_history)<=4: # It's the first round: collude
+       return 'c'
+ #       recent_round_them=their_history[-3]
+    elif their_history[-3] =='b' or their_history[-2] == 'b' or their_history[-1] == 'b': # If the other player has betrayed within the last 3 moves, betray.
+            return 'b'               # Betray.
+    else:
+        return 'c'         
+    
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')       --------------------------------------------------------------------------------
+team10--------------------------------------------------------------------------------
+import random
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Eclipse' # Only 10 chars displayed.
+strategy_name = 'Chance'
+strategy_description = 'Randomly chooses an option - Michael'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    options = ('b','c')
+    return options[random.randint(0, len(options)-1)]
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team13--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'The name the team gives to itself' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team14--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+
+
+team_name = 'TheGoldman'
+strategy_name = 'Mostly C until B'
+strategy_description = 'Collude for 8 turns, then collude until betrayed'
+
+def move(my_history, their_history, my_score, their_score):
+    if len(their_history) <= 8:
+        return 'c'
+    else:
+        if 'b' in their_history:
+            return 'b'
+        else:
+            return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')         --------------------------------------------------------------------------------
+team15--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'tit for tat' # Only 10 chars displayed.
+strategy_name = 'mimick'
+strategy_description = 'copies oponents move'
+
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    if len(my_history) ==0:
+        return 'c'
+    elif 'b' in their_history[-1:]: # If the other player has betrayed within last round, 
+        return 'b'
+    elif 'c' in their_history[-1:]: # If the other player has caluded within last round, 
+        return 'c'
+
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+
+    return 'c'
+
+
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print ('Test passed')
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')              --------------------------------------------------------------------------------
+Section 3 - Game Data for Team Ben
+--------------------------------------------------------------------------------
+-247.96747967479675 pt/round: Ben(P0) "alternate"
+-247.96747967479675 pt/round: cape diem(P1) "collude at desperate times"
+bCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+bC                                                                              
+
+ccccccccccccccccccccccccccccccccccccccccccc
+                                           
+
+--------------------------------------------------------------------------------
+-477.48538011695905 pt/round: Ben(P0) "alternate"
+76.90058479532163 pt/round: D9(P2) "betray"
+BBBBBBbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+ccccccbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccc
+BBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-5.8558558558558556 pt/round: Ben(P0) "alternate"
+-5.8558558558558556 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+BbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-8.223684210526315 pt/round: Ben(P0) "alternate"
+-0.32894736842105265 pt/round: Jeysi(P4) "Betraying"
+bccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+bBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-266.5 pt/round: Ben(P0) "alternate"
+-224.5 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Bbcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cbBBBBBBBB                                                                      
+
+cccccccccccccccccccc
+                    
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Ben(P0) "alternate"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+bccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccc
+                         
+
+--------------------------------------------------------------------------------
+-252.21238938053096 pt/round: Ben(P0) "alternate"
+-241.5929203539823 pt/round: Midnight(P7) "Past Chance Guess"
+bcCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+bBCB                                                                            
+
+ccccccccccccccccccccccccccccccccc
+                                 
+
+--------------------------------------------------------------------------------
+-488.4375 pt/round: Ben(P0) "alternate"
+92.8125 pt/round: that 1 guy(P8) "Blitzkrieg"
+BbcCCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cbBCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-11.160714285714286 pt/round: Ben(P0) "alternate"
+-21.875 pt/round: 009DoNeal(P9) "Three Strikes"
+BBBBBbcccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cccccbBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-232.57575757575756 pt/round: Ben(P0) "alternate"
+40.15151515151515 pt/round: Eclipse(P10) "Chance"
+BBbCcccccCccccCccccCCcCCCCCcCccccCCccCCCcCCcCCCcCcccCcccCCcCcccCCCCCcCCCccCccCcc
+ccbCBBBBBCBBBBCBBBBCCBCCCCCBCBBBBCCBBCCCBCCBCCCBCBBBCBBBCCBCBBBCCCCCBCCCBBCBBCBB
+
+cCCccCccCccCCCcCcCCcCccCCCCcCCCCCCCCcCCCCCcccCCcCccCCcCcCcCCCccCCcCCCccccCCccCCC
+BCCBBCBBCBBCCCBCBCCBCBBCCCCBCCCCCCCCBCCCCCBBBCCBCBBCCBCBCBCCCBBCCBCCCBBBBCCBBCCC
+
+cCcCcCcCcccCCcCcCcCCCcCccCCCccCcCCcCcc
+BCBCBCBCBBBCCBCBCBCCCBCBBCCCBBCBCCBCBB
+
+--------------------------------------------------------------------------------
+100.0 pt/round: Ben(P0) "alternate"
+-500.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-462.5827814569536 pt/round: Ben(P0) "alternate"
+61.920529801324506 pt/round: TheGoldman(P12) "Mostly C until B"
+BBBBBBBBBbcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccccccccbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-4.333333333333333 pt/round: Ben(P0) "alternate"
+-4.333333333333333 pt/round: tit for tat(P13) "mimick"
+BbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team cape diem
+--------------------------------------------------------------------------------
+-247.96747967479675 pt/round: cape diem(P1) "collude at desperate times"
+-247.96747967479675 pt/round: Ben(P0) "alternate"
+bC                                                                              
+bCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                           
+ccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-246.55172413793105 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: D9(P2) "betray"
+BC                                                                              
+cCccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                                                                                
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+              
+bbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-249.47916666666666 pt/round: cape diem(P1) "collude at desperate times"
+-249.47916666666666 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+Bc                                                                              
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                
+cccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-251.25628140703517 pt/round: cape diem(P1) "collude at desperate times"
+-248.24120603015075 pt/round: Jeysi(P4) "Betraying"
+bc                                                                              
+bBbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                       
+ccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-249.375 pt/round: cape diem(P1) "collude at desperate times"
+-249.375 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Bc                                                                              
+cBbbbbbbbb                                                                      
+
+                                                                                
+                                                                                
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+bc                                                                              
+                                                                                
+
+                                                           
+                                                           
+
+--------------------------------------------------------------------------------
+-244.69026548672565 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: Midnight(P7) "Past Chance Guess"
+BC                                                                              
+cCcc                                                                            
+
+                                 
+                                 
+
+--------------------------------------------------------------------------------
+-249.33333333333334 pt/round: cape diem(P1) "collude at desperate times"
+-249.33333333333334 pt/round: that 1 guy(P8) "Blitzkrieg"
+Bc                                                                              
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                      
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-244.39252336448598 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: 009DoNeal(P9) "Three Strikes"
+BC                                                                              
+cCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                           
+ccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-244.87179487179486 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: Eclipse(P10) "Chance"
+BC                                                                              
+cCccbccbcbbcccbcbcccbbbcbbcbbcbccbbccbcbbcbbccbcbbbbbccbbbbccccbccbccbcbbbbccccc
+
+                                     
+cbbbbccccbccbccccbbcbbccccccbbbcbbbcc
+
+--------------------------------------------------------------------------------
+-245.08196721311475 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+BC                                                                              
+cCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                          
+cccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-244.23076923076923 pt/round: cape diem(P1) "collude at desperate times"
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+BC                                                                              
+cCcccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                        
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-249.48979591836735 pt/round: cape diem(P1) "collude at desperate times"
+-249.48979591836735 pt/round: tit for tat(P13) "mimick"
+Bc                                                                              
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                    
+cccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team D9
+--------------------------------------------------------------------------------
+76.90058479532163 pt/round: D9(P2) "betray"
+-477.48538011695905 pt/round: Ben(P0) "alternate"
+ccccccbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBB
+ccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: D9(P2) "betray"
+-246.55172413793105 pt/round: cape diem(P1) "collude at desperate times"
+cCccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BC                                                                              
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                                                                
+
+bbbbbbbbbbbbbb
+              
+
+--------------------------------------------------------------------------------
+-239.367816091954 pt/round: D9(P2) "betray"
+-242.816091954023 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbb
+bbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+89.39393939393939 pt/round: D9(P2) "betray"
+-483.3333333333333 pt/round: Jeysi(P4) "Betraying"
+cccCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BBBCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-255.3763440860215 pt/round: D9(P2) "betray"
+-239.247311827957 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Ccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBBBBBbbbb                                                                      
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                                                                
+
+bbbbbbbbbbbbbbbbbbbbbbbbbb
+                          
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: D9(P2) "betray"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+ccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                                                                
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                                                                
+
+bbbbbbbbbbbbbbbbb
+                 
+
+--------------------------------------------------------------------------------
+-252.80898876404495 pt/round: D9(P2) "betray"
+-242.69662921348313 pt/round: Midnight(P7) "Past Chance Guess"
+ccCcccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BBCB    bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-247.39583333333334 pt/round: D9(P2) "betray"
+-241.14583333333334 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-239.1812865497076 pt/round: D9(P2) "betray"
+-242.69005847953215 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbb
+bbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-85.0 pt/round: D9(P2) "betray"
+-355.0 pt/round: Eclipse(P10) "Chance"
+CccCccBBbbBBbbBbbbbBbbbbbBbBBbBBBbBbBbBbBBbbBBbbBbbbbBBBbBbbBBbBbBbbbBBbbbBBBbBb
+CBBCBBccbbccbbcbbbbcbbbbbcbccbcccbcbcbcbccbbccbbcbbbbcccbcbbccbcbcbbbccbbbcccbcb
+
+BbBbbBBbbBBBbBBbBBbBBbBBbBBbbbbBbBBBbBBB
+cbcbbccbbcccbccbccbccbccbccbbbbcbcccbccc
+
+--------------------------------------------------------------------------------
+95.48872180451127 pt/round: D9(P2) "betray"
+-477.4436090225564 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+CCCCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+ccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-235.42857142857142 pt/round: D9(P2) "betray"
+-245.71428571428572 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCCCBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCcccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-237.15277777777777 pt/round: D9(P2) "betray"
+-241.31944444444446 pt/round: tit for tat(P13) "mimick"
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team FoxHound
+--------------------------------------------------------------------------------
+-5.8558558558558556 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-5.8558558558558556 pt/round: Ben(P0) "alternate"
+cbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-249.47916666666666 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-249.47916666666666 pt/round: cape diem(P1) "collude at desperate times"
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+Bc                                                                              
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccc
+                                
+
+--------------------------------------------------------------------------------
+-242.816091954023 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-239.367816091954 pt/round: D9(P2) "betray"
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbb
+bbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-5.660377358490566 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-5.660377358490566 pt/round: Jeysi(P4) "Betraying"
+cbbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BbbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-246.7741935483871 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBbbbbbbbb                                                                      
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccc
+                          
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                 
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-245.2755905511811 pt/round: Midnight(P7) "Past Chance Guess"
+Ccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-243.30357142857142 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-237.94642857142858 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-153.59116022099448 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+-153.59116022099448 pt/round: Eclipse(P10) "Chance"
+cbbBCCCcbbBcbbbbBCCCCcBCCCCCcbbbbbBcbBcBCcbbBCCCcBCcBcbBCcbBCcBcbbBCCcbBCCcbbbBc
+BbbcCCCBbbcBbbbbcCCCCBcCCCCCBbbbbbcBbcBcCBbbcCCCBcCBcBbcCBbcCBcBbbcCCBbcCCBbbbcB
+
+BcbBcBcbbBCcbbbBCCcBCCcbBcBcbbbBcBCCCCCCCCCcBCCcBcBCCCcBcBcBCCcBCCcbbBcbbbbBcBcB
+cBbcBcBbbcCBbbbcCCBcCCBbcBcBbbbcBcCCCCCCCCCBcCCBcBcCCCBcBcBcCCBcCCBbbcBbbbbcBcBc
+
+CCCcbBcBCCcBcbbBCcbBC
+CCCBbcBcCCBcBbbcCBbcC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+0.0 pt/round: tit for tat(P13) "mimick"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Jeysi
+--------------------------------------------------------------------------------
+-0.32894736842105265 pt/round: Jeysi(P4) "Betraying"
+-8.223684210526315 pt/round: Ben(P0) "alternate"
+bBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+bccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-248.24120603015075 pt/round: Jeysi(P4) "Betraying"
+-251.25628140703517 pt/round: cape diem(P1) "collude at desperate times"
+bBbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+bc                                                                              
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccccccccccccc
+                                       
+
+--------------------------------------------------------------------------------
+-483.3333333333333 pt/round: Jeysi(P4) "Betraying"
+89.39393939393939 pt/round: D9(P2) "betray"
+BBBCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-5.660377358490566 pt/round: Jeysi(P4) "Betraying"
+-5.660377358490566 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+BbbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cbbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-257.4074074074074 pt/round: Jeysi(P4) "Betraying"
+-238.35978835978835 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Bbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cbbBBBBBBB                                                                      
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccc
+                             
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Jeysi(P4) "Betraying"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+b  ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                      
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Jeysi(P4) "Betraying"
+-246.49122807017545 pt/round: Midnight(P7) "Past Chance Guess"
+bbbCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+bbbCB                                                                           
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccc
+           
+
+--------------------------------------------------------------------------------
+-483.2 pt/round: Jeysi(P4) "Betraying"
+88.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+BbbcCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cbbBCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-1.1111111111111112 pt/round: Jeysi(P4) "Betraying"
+-7.777777777777778 pt/round: 009DoNeal(P9) "Three Strikes"
+BBBCCcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cccCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-266.26506024096386 pt/round: Jeysi(P4) "Betraying"
+44.57831325301205 pt/round: Eclipse(P10) "Chance"
+BBBccccCccCcCcCccccCCCCCCccccCccCCCccccccccCCccccCCcCCcCcccCcCCccCCcCCcCccCCccCC
+cccBBBBCBBCBCBCBBBBCCCCCCBBBBCBBCCCBBBBBBBBCCBBBBCCBCCBCBBBCBCCBBCCBCCBCBBCCBBCC
+
+cCcccccCccccCccCcCcCccCcCCcCcccccccCcCCCCcccCCccCCCCccCCCcccCcCccCcccCCCCcCCCCCC
+BCBBBBBCBBBBCBBCBCBCBBCBCCBCBBBBBBBCBCCCCBBBCCBBCCCCBBCCCBBBCBCBBCBBBCCCCBCCCCCC
+
+CCccCC
+CCBBCC
+
+--------------------------------------------------------------------------------
+2.112676056338028 pt/round: Jeysi(P4) "Betraying"
+-10.56338028169014 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+BBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-468.83116883116884 pt/round: Jeysi(P4) "Betraying"
+84.41558441558442 pt/round: TheGoldman(P12) "Mostly C until B"
+BBBCCCCCCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+cccCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-6.428571428571429 pt/round: Jeysi(P4) "Betraying"
+-6.428571428571429 pt/round: tit for tat(P13) "mimick"
+BbbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+cbbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team 5-in-1
+--------------------------------------------------------------------------------
+-224.5 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-266.5 pt/round: Ben(P0) "alternate"
+cbBBBBBBBB                                                                      
+Bbcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                    
+cccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-249.375 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-249.375 pt/round: cape diem(P1) "collude at desperate times"
+cBbbbbbbbb                                                                      
+Bc                                                                              
+
+                                                                                
+                                                                                
+
+--------------------------------------------------------------------------------
+-239.247311827957 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-255.3763440860215 pt/round: D9(P2) "betray"
+CBBBBBbbbb                                                                      
+Ccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                                                                                
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                          
+bbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-246.7741935483871 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CBbbbbbbbb                                                                      
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                          
+cccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-238.35978835978835 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-257.4074074074074 pt/round: Jeysi(P4) "Betraying"
+cbbBBBBBBB                                                                      
+Bbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                             
+ccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cbbbbbbbbb                                                                      
+                                                                                
+
+                        
+                        
+
+--------------------------------------------------------------------------------
+-249.41860465116278 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-249.41860465116278 pt/round: Midnight(P7) "Past Chance Guess"
+cbbBbbbbbb                                                                      
+Bbbcbbbbbbbb                                                                    
+
+                                                                                
+                                                                                
+
+            
+            
+
+--------------------------------------------------------------------------------
+-247.0 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-250.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+CBbbbbbbbb                                                                      
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                        
+cccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-233.66336633663366 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-257.4257425742574 pt/round: 009DoNeal(P9) "Three Strikes"
+CBBBBbbbbb                                                                      
+Cccccbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                     
+ccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-238.29113924050634 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-257.27848101265823 pt/round: Eclipse(P10) "Chance"
+cBbBbbBBBB                                                                      
+Bcbcbbccccbbcbbcbcbbbcbbcbbcccbbbccbcbbbcbccbccbccbbbccccbbcccccbccbcbcbbccbbcbc
+
+                                                                              
+ccbccbcbbbcbccbbcccbccbbbbcbbbbcbbbcbbbcbbbccbbbccbcbcccccbbbcbbbccccbcbcbbcbb
+
+--------------------------------------------------------------------------------
+-229.51807228915663 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-262.04819277108436 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CBBBBBBBBB                                                                      
+Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+      
+cccccc
+
+--------------------------------------------------------------------------------
+-229.66666666666666 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-261.6666666666667 pt/round: TheGoldman(P12) "Mostly C until B"
+CBBBBBBBBb                                                                      
+Cccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                                                                      
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-245.71428571428572 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+-250.0 pt/round: tit for tat(P13) "mimick"
+CBbbbbbbbb                                                                      
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                            
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team Team
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: Ben(P0) "alternate"
+                                                                                
+bccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                         
+ccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: cape diem(P1) "collude at desperate times"
+                                                                                
+bc                                                                              
+
+                                                           
+                                                           
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: D9(P2) "betray"
+                                                                                
+ccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                                                                                
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+                 
+bbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                 
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: Jeysi(P4) "Betraying"
+                                                                                
+b  ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                      
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+                                                                                
+cbbbbbbbbb                                                                      
+
+                        
+                        
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: Midnight(P7) "Past Chance Guess"
+                                                                                
+bbbb                                                                            
+
+                                                                                
+                                                                                
+
+    
+    
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+           
+ccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: 009DoNeal(P9) "Three Strikes"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                 
+ccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: Eclipse(P10) "Chance"
+                                                                                
+cbbbcbcccbcbbcbbccccccbbbbcbbcbbccccccbcccbbcbbcbbbcccbcbbbbbbcbbbbbccbccbbcbccc
+
+                         
+bbcbbccbcccbcbcbbcbcbbbbc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                     
+ccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                     
+ccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+-250.0 pt/round: tit for tat(P13) "mimick"
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                           
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Midnight
+--------------------------------------------------------------------------------
+-241.5929203539823 pt/round: Midnight(P7) "Past Chance Guess"
+-252.21238938053096 pt/round: Ben(P0) "alternate"
+bBCB                                                                            
+bcCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                 
+ccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Midnight(P7) "Past Chance Guess"
+-244.69026548672565 pt/round: cape diem(P1) "collude at desperate times"
+cCcc                                                                            
+BC                                                                              
+
+                                 
+                                 
+
+--------------------------------------------------------------------------------
+-242.69662921348313 pt/round: Midnight(P7) "Past Chance Guess"
+-252.80898876404495 pt/round: D9(P2) "betray"
+BBCB    bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ccCcccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-245.2755905511811 pt/round: Midnight(P7) "Past Chance Guess"
+-250.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+Ccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-246.49122807017545 pt/round: Midnight(P7) "Past Chance Guess"
+-250.0 pt/round: Jeysi(P4) "Betraying"
+bbbCB                                                                           
+bbbCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+           
+ccccccccccc
+
+--------------------------------------------------------------------------------
+-249.41860465116278 pt/round: Midnight(P7) "Past Chance Guess"
+-249.41860465116278 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Bbbcbbbbbbbb                                                                    
+cbbBbbbbbb                                                                      
+
+                                                                                
+                                                                                
+
+            
+            
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Midnight(P7) "Past Chance Guess"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+bbbb                                                                            
+                                                                                
+
+                                                                                
+                                                                                
+
+    
+    
+
+--------------------------------------------------------------------------------
+-132.6315789473684 pt/round: Midnight(P7) "Past Chance Guess"
+-328.42105263157896 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCBc B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  
+CCcBccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+
+B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B 
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+
+ B  B  B  B  B  B  B  B  B  B 
+ccbccbccbccbccbccbccbccbccbccb
+
+--------------------------------------------------------------------------------
+-240.58441558441558 pt/round: Midnight(P7) "Past Chance Guess"
+-248.37662337662337 pt/round: 009DoNeal(P9) "Three Strikes"
+CCBC   B  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCcCcbccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-163.5593220338983 pt/round: Midnight(P7) "Past Chance Guess"
+-309.3220338983051 pt/round: Eclipse(P10) "Chance"
+BCbBB  B  Bb bBb b BB     B  bBb B  b bbbBb B   b b b bbBB    B  b b bbbbbbbBb B
+cCbccbccbbcbbbcbcbbcccccbccbbbcbccbcbbbbbcbcccbcbcbcbbbbccccbccbcbcbbbbbbbbbcbcc
+
+  b Bb bbBb B  BB    bBb Bb b BB  B   Bb Bb Bb bbBb b BB  bBB   b b b B  b bbBB 
+bcbbcbbbbcbccbbccccbbbcbbcbcbbccbcccbbcbbcbbcbbbbcbcbbccbbbcccbcbcbcbccbcbbbbccb
+
+ b Bb b b bbBB  B
+cbbcbcbcbbbbccbcc
+
+--------------------------------------------------------------------------------
+-242.0731707317073 pt/round: Midnight(P7) "Past Chance Guess"
+-253.0487804878049 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CBBB                                                                            
+Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+                                                                                
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+    
+cccc
+
+--------------------------------------------------------------------------------
+-243.58288770053477 pt/round: Midnight(P7) "Past Chance Guess"
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+BCCB       bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cCCccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-132.1608040201005 pt/round: Midnight(P7) "Past Chance Guess"
+-331.15577889447235 pt/round: tit for tat(P13) "mimick"
+CBcBb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb
+CcBcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcb
+
+ Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb B
+bcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+
+b Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb B
+bbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team that 1 guy
+--------------------------------------------------------------------------------
+92.8125 pt/round: that 1 guy(P8) "Blitzkrieg"
+-488.4375 pt/round: Ben(P0) "alternate"
+cbBCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BbcCCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-249.33333333333334 pt/round: that 1 guy(P8) "Blitzkrieg"
+-249.33333333333334 pt/round: cape diem(P1) "collude at desperate times"
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+Bc                                                                              
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                      
+
+--------------------------------------------------------------------------------
+-241.14583333333334 pt/round: that 1 guy(P8) "Blitzkrieg"
+-247.39583333333334 pt/round: D9(P2) "betray"
+CCCCBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-237.94642857142858 pt/round: that 1 guy(P8) "Blitzkrieg"
+-243.30357142857142 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+88.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+-483.2 pt/round: Jeysi(P4) "Betraying"
+cbbBCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BbbcCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+ccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+-247.0 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBbbbbbbbb                                                                      
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccccccccccc
+                                        
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: that 1 guy(P8) "Blitzkrieg"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccc
+           
+
+--------------------------------------------------------------------------------
+-328.42105263157896 pt/round: that 1 guy(P8) "Blitzkrieg"
+-132.6315789473684 pt/round: Midnight(P7) "Past Chance Guess"
+CCcBccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbc
+CCBc B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  
+
+cbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccbccb
+B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B  B 
+
+ccbccbccbccbccbccbccbccbccbccb
+ B  B  B  B  B  B  B  B  B  B 
+
+--------------------------------------------------------------------------------
+-237.01923076923077 pt/round: that 1 guy(P8) "Blitzkrieg"
+-242.78846153846155 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-124.67105263157895 pt/round: that 1 guy(P8) "Blitzkrieg"
+-223.35526315789474 pt/round: Eclipse(P10) "Chance"
+cBcBcbbbbbbbBCcBCCBbBcBCCBBBbBCCBbBcbBCcbbbBcBcbBCcBcbBcBCCbBcbBCCBBbbBCCBbBcbBC
+BcBcBbbbbbbbcCBcCCcbcBcCCcccbcCCcbcBbcCBbbbcBcBbcCBcBbcBcCCbcBbcCCccbbcCCcbcBbcC
+
+CbbBcBCcBCCbBcBcbBcBCCBBBBBbbBCcBcBcbbbbBCCbbbBcBcBcbbbBcBcbBCcBCCbbBCCB
+CbbcBcCBcCCbcBcBbcBcCCcccccbbcCBcBcBbbbbcCCbbbcBcBcBbbbcBcBbcCBcCCbbcCCc
+
+--------------------------------------------------------------------------------
+96.29629629629629 pt/round: that 1 guy(P8) "Blitzkrieg"
+-481.48148148148147 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+CCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-230.07246376811594 pt/round: that 1 guy(P8) "Blitzkrieg"
+-251.81159420289856 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCBBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-237.94642857142858 pt/round: that 1 guy(P8) "Blitzkrieg"
+-243.30357142857142 pt/round: tit for tat(P13) "mimick"
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team 009DoNeal
+--------------------------------------------------------------------------------
+-21.875 pt/round: 009DoNeal(P9) "Three Strikes"
+-11.160714285714286 pt/round: Ben(P0) "alternate"
+cccccbBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BBBBBbcccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: 009DoNeal(P9) "Three Strikes"
+-244.39252336448598 pt/round: cape diem(P1) "collude at desperate times"
+cCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BC                                                                              
+
+ccccccccccccccccccccccccccc
+                           
+
+--------------------------------------------------------------------------------
+-242.69005847953215 pt/round: 009DoNeal(P9) "Three Strikes"
+-239.1812865497076 pt/round: D9(P2) "betray"
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbb
+bbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-7.777777777777778 pt/round: 009DoNeal(P9) "Three Strikes"
+-1.1111111111111112 pt/round: Jeysi(P4) "Betraying"
+cccCCBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BBBCCcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-257.4257425742574 pt/round: 009DoNeal(P9) "Three Strikes"
+-233.66336633663366 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Cccccbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBBBBbbbbb                                                                      
+
+ccccccccccccccccccccc
+                     
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: 009DoNeal(P9) "Three Strikes"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                 
+
+--------------------------------------------------------------------------------
+-248.37662337662337 pt/round: 009DoNeal(P9) "Three Strikes"
+-240.58441558441558 pt/round: Midnight(P7) "Past Chance Guess"
+CCcCcbccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCBC   B  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-242.78846153846155 pt/round: 009DoNeal(P9) "Three Strikes"
+-237.01923076923077 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-98.0 pt/round: 009DoNeal(P9) "Three Strikes"
+-298.0 pt/round: Eclipse(P10) "Chance"
+CcCcCbBBBcbbBbbbBbbbBBBcbBbbbBbbBbBBbBbbbbBbBbBbbBBBCCCcBbbBbbBBBCCcbBBbbbBbBbBb
+CBCBCbcccBbbcbbbcbbbcccBbcbbbcbbcbccbcbbbbcbcbcbbcccCCCBcbbcbbcccCCBbccbbbcbcbcb
+
+bbBBBCcBbbbbBbbBBBCcBBBCCcbbBbBbbBBBcbBBBCCcBBbBBbBbbBbBBBCcbbBBBCcbBB
+bbcccCBcbbbbcbbcccCBcccCCBbbcbcbbcccBbcccCCBccbccbcbbcbcccCBbbcccCBbcc
+
+--------------------------------------------------------------------------------
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+0.0 pt/round: tit for tat(P13) "mimick"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Eclipse
+--------------------------------------------------------------------------------
+40.15151515151515 pt/round: Eclipse(P10) "Chance"
+-232.57575757575756 pt/round: Ben(P0) "alternate"
+ccbCBBBBBCBBBBCBBBBCCBCCCCCBCBBBBCCBBCCCBCCBCCCBCBBBCBBBCCBCBBBCCCCCBCCCBBCBBCBB
+BBbCcccccCccccCccccCCcCCCCCcCccccCCccCCCcCCcCCCcCcccCcccCCcCcccCCCCCcCCCccCccCcc
+
+BCCBBCBBCBBCCCBCBCCBCBBCCCCBCCCCCCCCBCCCCCBBBCCBCBBCCBCBCBCCCBBCCBCCCBBBBCCBBCCC
+cCCccCccCccCCCcCcCCcCccCCCCcCCCCCCCCcCCCCCcccCCcCccCCcCcCcCCCccCCcCCCccccCCccCCC
+
+BCBCBCBCBBBCCBCBCBCCCBCBBCCCBBCBCCBCBB
+cCcCcCcCcccCCcCcCcCCCcCccCCCccCcCCcCcc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Eclipse(P10) "Chance"
+-244.87179487179486 pt/round: cape diem(P1) "collude at desperate times"
+cCccbccbcbbcccbcbcccbbbcbbcbbcbccbbccbcbbcbbccbcbbbbbccbbbbccccbccbccbcbbbbccccc
+BC                                                                              
+
+cbbbbccccbccbccccbbcbbccccccbbbcbbbcc
+                                     
+
+--------------------------------------------------------------------------------
+-355.0 pt/round: Eclipse(P10) "Chance"
+-85.0 pt/round: D9(P2) "betray"
+CBBCBBccbbccbbcbbbbcbbbbbcbccbcccbcbcbcbccbbccbbcbbbbcccbcbbccbcbcbbbccbbbcccbcb
+CccCccBBbbBBbbBbbbbBbbbbbBbBBbBBBbBbBbBbBBbbBBbbBbbbbBBBbBbbBBbBbBbbbBBbbbBBBbBb
+
+cbcbbccbbcccbccbccbccbccbccbbbbcbcccbccc
+BbBbbBBbbBBBbBBbBBbBBbBBbBBbbbbBbBBBbBBB
+
+--------------------------------------------------------------------------------
+-153.59116022099448 pt/round: Eclipse(P10) "Chance"
+-153.59116022099448 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+BbbcCCCBbbcBbbbbcCCCCBcCCCCCBbbbbbcBbcBcCBbbcCCCBcCBcBbcCBbcCBcBbbcCCBbcCCBbbbcB
+cbbBCCCcbbBcbbbbBCCCCcBCCCCCcbbbbbBcbBcBCcbbBCCCcBCcBcbBCcbBCcBcbbBCCcbBCCcbbbBc
+
+cBbcBcBbbcCBbbbcCCBcCCBbcBcBbbbcBcCCCCCCCCCBcCCBcBcCCCBcBcBcCCBcCCBbbcBbbbbcBcBc
+BcbBcBcbbBCcbbbBCCcBCCcbBcBcbbbBcBCCCCCCCCCcBCCcBcBCCCcBcBcBCCcBCCcbbBcbbbbBcBcB
+
+CCCBbcBcCCBcBbbcCBbcC
+CCCcbBcBCCcBcbbBCcbBC
+
+--------------------------------------------------------------------------------
+44.57831325301205 pt/round: Eclipse(P10) "Chance"
+-266.26506024096386 pt/round: Jeysi(P4) "Betraying"
+cccBBBBCBBCBCBCBBBBCCCCCCBBBBCBBCCCBBBBBBBBCCBBBBCCBCCBCBBBCBCCBBCCBCCBCBBCCBBCC
+BBBccccCccCcCcCccccCCCCCCccccCccCCCccccccccCCccccCCcCCcCcccCcCCccCCcCCcCccCCccCC
+
+BCBBBBBCBBBBCBBCBCBCBBCBCCBCBBBBBBBCBCCCCBBBCCBBCCCCBBCCCBBBCBCBBCBBBCCCCBCCCCCC
+cCcccccCccccCccCcCcCccCcCCcCcccccccCcCCCCcccCCccCCCCccCCCcccCcCccCcccCCCCcCCCCCC
+
+CCBBCC
+CCccCC
+
+--------------------------------------------------------------------------------
+-257.27848101265823 pt/round: Eclipse(P10) "Chance"
+-238.29113924050634 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Bcbcbbccccbbcbbcbcbbbcbbcbbcccbbbccbcbbbcbccbccbccbbbccccbbcccccbccbcbcbbccbbcbc
+cBbBbbBBBB                                                                      
+
+ccbccbcbbbcbccbbcccbccbbbbcbbbbcbbbcbbbcbbbccbbbccbcbcccccbbbcbbbccccbcbcbbcbb
+                                                                              
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: Eclipse(P10) "Chance"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cbbbcbcccbcbbcbbccccccbbbbcbbcbbccccccbcccbbcbbcbbbcccbcbbbbbbcbbbbbccbccbbcbccc
+                                                                                
+
+bbcbbccbcccbcbcbbcbcbbbbc
+                         
+
+--------------------------------------------------------------------------------
+-309.3220338983051 pt/round: Eclipse(P10) "Chance"
+-163.5593220338983 pt/round: Midnight(P7) "Past Chance Guess"
+cCbccbccbbcbbbcbcbbcccccbccbbbcbccbcbbbbbcbcccbcbcbcbbbbccccbccbcbcbbbbbbbbbcbcc
+BCbBB  B  Bb bBb b BB     B  bBb B  b bbbBb B   b b b bbBB    B  b b bbbbbbbBb B
+
+bcbbcbbbbcbccbbccccbbbcbbcbcbbccbcccbbcbbcbbcbbbbcbcbbccbbbcccbcbcbcbccbcbbbbccb
+  b Bb bbBb B  BB    bBb Bb b BB  B   Bb Bb Bb bbBb b BB  bBB   b b b B  b bbBB 
+
+cbbcbcbcbbbbccbcc
+ b Bb b b bbBB  B
+
+--------------------------------------------------------------------------------
+-223.35526315789474 pt/round: Eclipse(P10) "Chance"
+-124.67105263157895 pt/round: that 1 guy(P8) "Blitzkrieg"
+BcBcBbbbbbbbcCBcCCcbcBcCCcccbcCCcbcBbcCBbbbcBcBbcCBcBbcBcCCbcBbcCCccbbcCCcbcBbcC
+cBcBcbbbbbbbBCcBCCBbBcBCCBBBbBCCBbBcbBCcbbbBcBcbBCcBcbBcBCCbBcbBCCBBbbBCCBbBcbBC
+
+CbbcBcCBcCCbcBcBbcBcCCcccccbbcCBcBcBbbbbcCCbbbcBcBcBbbbcBcBbcCBcCCbbcCCc
+CbbBcBCcBCCbBcBcbBcBCCBBBBBbbBCcBcBcbbbbBCCbbbBcBcBcbbbBcBcbBCcBCCbbBCCB
+
+--------------------------------------------------------------------------------
+-298.0 pt/round: Eclipse(P10) "Chance"
+-98.0 pt/round: 009DoNeal(P9) "Three Strikes"
+CBCBCbcccBbbcbbbcbbbcccBbcbbbcbbcbccbcbbbbcbcbcbbcccCCCBcbbcbbcccCCBbccbbbcbcbcb
+CcCcCbBBBcbbBbbbBbbbBBBcbBbbbBbbBbBBbBbbbbBbBbBbbBBBCCCcBbbBbbBBBCCcbBBbbbBbBbBb
+
+bbcccCBcbbbbcbbcccCBcccCCBbbcbcbbcccBbcccCCBccbccbcbbcbcccCBbbcccCBbcc
+bbBBBCcBbbbbBbbBBBCcBBBCCcbbBbBbbBBBcbBBBCCcBBbBBbBbbBbBBBCcbbBBBCcbBB
+
+--------------------------------------------------------------------------------
+42.25352112676056 pt/round: Eclipse(P10) "Chance"
+-211.26760563380282 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+BCCCCBBCCCCBCBCCCBBBBBCBBCCCCBBCBCBCBCBBCBBCCBCCBCCBCCBBCBBCCCCCCCBBCCCCBBBCCCCB
+cCCCCccCCCCcCcCCCcccccCccCCCCccCcCcCcCccCccCCcCCcCCcCCccCccCCCCCCCccCCCCcccCCCCc
+
+BCCCBCBCCBBCBCCBBCBCBCBCCCBBBCCBBCCBCCBCCBBCCCCCBBCBCCBCBCBCCC
+cCCCcCcCCccCcCCccCcCcCcCCCcccCCccCCcCCcCCccCCCCCccCcCCcCcCcCCC
+
+--------------------------------------------------------------------------------
+-335.1694915254237 pt/round: Eclipse(P10) "Chance"
+-91.10169491525424 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCBCCCBcbcbbbbccbbbcccbbccbcbbcccbbbbcbbccccbcbcbccccbbcbbcccbcccbbbbbbbcbcbcb
+CCCCcCCCcBbBbbbbBBbbbBBBbbBBbBbbBBBbbbbBbbBBBBbBbBbBBBBbbBbbBBBbBBBbbbbbbbBbBbBb
+
+bcbcbbbcbbcccbbbbccbbcbbbbbbbcbcccbccc
+bBbBbbbBbbBBBbbbbBBbbBbbbbbbbBbBBBbBBB
+
+--------------------------------------------------------------------------------
+-156.91056910569105 pt/round: Eclipse(P10) "Chance"
+-161.78861788617886 pt/round: tit for tat(P13) "mimick"
+BcBbbcCCBcBbbbcBbcBbbbbcBbcBcBbcBcBcBcBbcBcBcCCBbcCCCCCCBbbcCBcCBbcBbcCCCCCBcCCB
+cBcbbBCCcBcbbbBcbBcbbbbBcbBcBcbBcBcBcBcbBcBcBCCcbBCCCCCCcbbBCcBCcbBcbBCCCCCcBCCc
+
+bcCCCBcBbcBcBcBbbcCBcCCCCCBcCBbcBcCCCBbbbbb
+bBCCCcBcbBcBcBcbbBCcBCCCCCcBCcbBcBCCCcbbbbb
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team The name the team gives to itself
+--------------------------------------------------------------------------------
+-500.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+100.0 pt/round: Ben(P0) "alternate"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+-245.08196721311475 pt/round: cape diem(P1) "collude at desperate times"
+cCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BC                                                                              
+
+cccccccccccccccccccccccccccccccccccccccccc
+                                          
+
+--------------------------------------------------------------------------------
+-477.4436090225564 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+95.48872180451127 pt/round: D9(P2) "betray"
+CCCCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-10.56338028169014 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+2.112676056338028 pt/round: Jeysi(P4) "Betraying"
+cccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-262.04819277108436 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+-229.51807228915663 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBBBBBBBBB                                                                      
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccc
+      
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccccccccccc
+                                     
+
+--------------------------------------------------------------------------------
+-253.0487804878049 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+-242.0731707317073 pt/round: Midnight(P7) "Past Chance Guess"
+Cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBBB                                                                            
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccc
+    
+
+--------------------------------------------------------------------------------
+-481.48148148148147 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+96.29629629629629 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+--------------------------------------------------------------------------------
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-211.26760563380282 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+42.25352112676056 pt/round: Eclipse(P10) "Chance"
+cCCCCccCCCCcCcCCCcccccCccCCCCccCcCcCcCccCccCCcCCcCCcCCccCccCCCCCCCccCCCCcccCCCCc
+BCCCCBBCCCCBCBCCCBBBBBCBBCCCCBBCBCBCBCBBCBBCCBCCBCCBCCBBCBBCCCCCCCBBCCCCBBBCCCCB
+
+cCCCcCcCCccCcCCccCcCcCcCCCcccCCccCCcCCcCCccCCCCCccCcCCcCcCcCCC
+BCCCBCBCCBBCBCCBBCBCBCBCCCBBBCCBBCCBCCBCCBBCCCCCBBCBCCBCBCBCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+0.0 pt/round: tit for tat(P13) "mimick"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team TheGoldman
+--------------------------------------------------------------------------------
+61.920529801324506 pt/round: TheGoldman(P12) "Mostly C until B"
+-462.5827814569536 pt/round: Ben(P0) "alternate"
+cccccccccbBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BBBBBBBBBbcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+-244.23076923076923 pt/round: cape diem(P1) "collude at desperate times"
+cCcccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BC                                                                              
+
+bbbbbbbbbbbbbbbbbbbbbbbb
+                        
+
+--------------------------------------------------------------------------------
+-245.71428571428572 pt/round: TheGoldman(P12) "Mostly C until B"
+-235.42857142857142 pt/round: D9(P2) "betray"
+CCCCCCcccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+84.41558441558442 pt/round: TheGoldman(P12) "Mostly C until B"
+-468.83116883116884 pt/round: Jeysi(P4) "Betraying"
+cccCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+BBBCCCCCCccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+--------------------------------------------------------------------------------
+-261.6666666666667 pt/round: TheGoldman(P12) "Mostly C until B"
+-229.66666666666666 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Cccccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBBBBBBBBb                                                                      
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+                                                                      
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccc
+                     
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: TheGoldman(P12) "Mostly C until B"
+-243.58288770053477 pt/round: Midnight(P7) "Past Chance Guess"
+cCCccccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BCCB       bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-251.81159420289856 pt/round: TheGoldman(P12) "Mostly C until B"
+-230.07246376811594 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCcccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-91.10169491525424 pt/round: TheGoldman(P12) "Mostly C until B"
+-335.1694915254237 pt/round: Eclipse(P10) "Chance"
+CCCCcCCCcBbBbbbbBBbbbBBBbbBBbBbbBBBbbbbBbbBBBBbBbBbBBBBbbBbbBBBbBBBbbbbbbbBbBbBb
+CCCCBCCCBcbcbbbbccbbbcccbbccbcbbcccbbbbcbbccccbcbcbccccbbcbbcccbcccbbbbbbbcbcbcb
+
+bBbBbbbBbbBBBbbbbBBbbBbbbbbbbBbBBBbBBB
+bcbcbbbcbbcccbbbbccbbcbbbbbbbcbcccbccc
+
+--------------------------------------------------------------------------------
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+0.0 pt/round: tit for tat(P13) "mimick"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team tit for tat
+--------------------------------------------------------------------------------
+-4.333333333333333 pt/round: tit for tat(P13) "mimick"
+-4.333333333333333 pt/round: Ben(P0) "alternate"
+cbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-249.48979591836735 pt/round: tit for tat(P13) "mimick"
+-249.48979591836735 pt/round: cape diem(P1) "collude at desperate times"
+cBcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+Bc                                                                              
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+cccccccccccccccccccccccccccccccccccc
+                                    
+
+--------------------------------------------------------------------------------
+-241.31944444444446 pt/round: tit for tat(P13) "mimick"
+-237.15277777777777 pt/round: D9(P2) "betray"
+CCCCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: tit for tat(P13) "mimick"
+0.0 pt/round: FoxHound(P3) "The Best offense Is The Best Defense"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-6.428571428571429 pt/round: tit for tat(P13) "mimick"
+-6.428571428571429 pt/round: Jeysi(P4) "Betraying"
+cbbBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BbbcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: tit for tat(P13) "mimick"
+-245.71428571428572 pt/round: 5-in-1(P5) "Collude first round, Betray until not betrayed consecutively"
+Ccbbbbbbbbbccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+CBbbbbbbbb                                                                      
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                            
+
+--------------------------------------------------------------------------------
+-250.0 pt/round: tit for tat(P13) "mimick"
+-250.0 pt/round: Team Team(P6) "BIG BUTTERY CAKES"
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                                
+
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+                                                                           
+
+--------------------------------------------------------------------------------
+-331.15577889447235 pt/round: tit for tat(P13) "mimick"
+-132.1608040201005 pt/round: Midnight(P7) "Past Chance Guess"
+CcBcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcb
+CBcBb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb
+
+bcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+ Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb B
+
+bbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+b Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb Bb B
+
+--------------------------------------------------------------------------------
+-243.30357142857142 pt/round: tit for tat(P13) "mimick"
+-237.94642857142858 pt/round: that 1 guy(P8) "Blitzkrieg"
+CCCCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CCCCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: tit for tat(P13) "mimick"
+0.0 pt/round: 009DoNeal(P9) "Three Strikes"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-161.78861788617886 pt/round: tit for tat(P13) "mimick"
+-156.91056910569105 pt/round: Eclipse(P10) "Chance"
+cBcbbBCCcBcbbbBcbBcbbbbBcbBcBcbBcBcBcBcbBcBcBCCcbBCCCCCCcbbBCcBCcbBcbBCCCCCcBCCc
+BcBbbcCCBcBbbbcBbcBbbbbcBbcBcBbcBcBcBcBbcBcBcCCBbcCCCCCCBbbcCBcCBbcBbcCCCCCBcCCB
+
+bBCCCcBcbBcBcBcbbBCcBCCCCCcBCcbBcBCCCcbbbbb
+bcCCCBcBbcBcBcBbbcCBcCCCCCBcCBbcBcCCCBbbbbb
+
+--------------------------------------------------------------------------------
+0.0 pt/round: tit for tat(P13) "mimick"
+0.0 pt/round: The name the team gives to itself(P11) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0.0 pt/round: tit for tat(P13) "mimick"
+0.0 pt/round: TheGoldman(P12) "Mostly C until B"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
