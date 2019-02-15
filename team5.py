@@ -27,13 +27,15 @@ def move(my_history, their_history, my_score, their_score):
     # Decide whether to return 'c' or 'b'.
     
     if len(my_history) == 0 and len(their_history) == 0:
-        return 'c'
-    elif len(their_history) >= 10 :
-        for i in range (10,0,-1):
+        return 'b'
+    elif len(their_history) >= 11 :
+        for i in range(-1,-11, -1):
             if their_history[i] == 'c' :
                 c_rounds += 1
         if c_rounds == 10:
             return 'c'
+        else:
+            return 'b'
     else:
         return 'b'
 
